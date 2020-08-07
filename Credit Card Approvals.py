@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 # Import pandas
 import pandas as pd
 
@@ -13,9 +10,6 @@ cc_apps = pd.read_csv("datasets/cc_approvals.data", header = None)
 
 # Inspect data
 cc_apps.head()
-
-
-# In[ ]:
 
 
 # Print summary statistics
@@ -31,9 +25,6 @@ print(cc_apps_info)
 print("\n")
 
 
-# In[ ]:
-
-
 # Import numpy
 import numpy as np
 
@@ -47,17 +38,12 @@ cc_apps = cc_apps.replace('?', np.NaN)
 print(cc_apps.tail())
 
 
-# In[ ]:
-
 
 # Impute the missing values with mean imputation
 cc_apps.fillna(cc_apps.mean(), inplace=True)
 
 # Count the number of NaNs in the dataset to verify
 print(cc_apps.isna().sum())
-
-
-# In[ ]:
 
 
 # Iterate over each column of cc_apps
@@ -70,8 +56,6 @@ for col in cc_apps:
 # Count the number of NaNs in the dataset and print the counts to verify
 print(cc_apps.isna().sum())
 
-
-# In[ ]:
 
 
 # Import LabelEncoder
@@ -97,8 +81,6 @@ for col in cc_apps.columns.values:
   #      cc_apps[col]=(cc_apps[col].dtypes == "int64")
 
 
-# In[ ]:
-
 
 # Import train_test_split
 from sklearn.model_selection import train_test_split
@@ -115,10 +97,6 @@ X,y = cc_apps[:,0:13] , cc_apps[:,13]
 # Split into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
-
-# In[ ]:
-
-
 # Import MinMaxScaler
 from sklearn.preprocessing import MinMaxScaler
 
@@ -129,9 +107,6 @@ rescaledX_train = scaler.fit_transform(X_train)
 rescaledX_test = scaler.fit_transform(X_test)
 
 
-# In[ ]:
-
-
 # Import LogisticRegression
 from sklearn.linear_model import LogisticRegression
 
@@ -140,9 +115,6 @@ logreg = LogisticRegression()
 
 # Fit logreg to the train set
 logreg.fit(rescaledX_train, y_train)
-
-
-# In[ ]:
 
 
 # Import confusion_matrix
@@ -158,9 +130,6 @@ print("Accuracy of logistic regression classifier: ", logreg.score(rescaledX_tes
 print(confusion_matrix(y_test, y_pred))
 
 
-# In[ ]:
-
-
 # Import GridSearchCV
 from sklearn.model_selection import GridSearchCV
 
@@ -170,9 +139,6 @@ max_iter = [100, 150, 200]
 
 # Create a dictionary where tol and max_iter are keys and the lists of their values are corresponding values
 param_grid = dict(tol = tol, max_iter = max_iter)
-
-
-# In[ ]:
 
 
 # Instantiate GridSearchCV with the required parameters
